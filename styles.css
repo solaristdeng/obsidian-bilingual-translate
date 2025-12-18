@@ -1,8 +1,33 @@
-/*
+/* Kiss Translator Plugin Styles */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+/* Translation line styling - subtle visual distinction */
+.kiss-translator-translation {
+	opacity: 0.85;
+	font-style: italic;
+}
 
-If your plugin does not need CSS, delete this file.
+/* Settings tab styling */
+.kiss-translator-settings h1 {
+	margin-bottom: 1em;
+}
 
-*/
+.kiss-translator-settings h2 {
+	margin-top: 1.5em;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.3em;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* API key input - show as password */
+.kiss-translator-settings input[type="password"] {
+	font-family: monospace;
+}
+
+/* Test button states */
+.kiss-translator-test-success {
+	color: var(--text-success);
+}
+
+.kiss-translator-test-failed {
+	color: var(--text-error);
+}
