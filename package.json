@@ -1,7 +1,7 @@
 {
-	"name": "kiss-translator-obsidian",
-	"version": "1.0.0",
-	"description": "Kiss Translator plugin for Obsidian - translate markdown files with OpenAI-compatible APIs",
+	"name": "obsidian-bilingual-translate",
+	"version": "0.0.1",
+	"description": "Bilingual Translate plugin for Obsidian - translate markdown files with OpenAI-compatible APIs",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

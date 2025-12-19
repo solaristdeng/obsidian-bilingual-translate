@@ -1,10 +1,10 @@
 {
-	"id": "kiss-translator",
-	"name": "Kiss Translator",
-	"version": "1.0.0",
+	"id": "obsidian-bilingual-translate",
+	"name": "Bilingual Translate",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Translate markdown files using OpenAI-compatible APIs. Creates bilingual output with original and translated text line by line.",
-	"author": "Kiss Translator",
-	"authorUrl": "https://github.com/fishjar/kiss-translator",
+	"author": "solaristdeng",
+	"authorUrl": "https://github.com/solaristdeng/kiss-translator-obsidian",
 	"isDesktopOnly": false
 }

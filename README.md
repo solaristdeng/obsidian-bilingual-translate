@@ -1,4 +1,4 @@
-# Kiss Translator for Obsidian
+# Bilingual Translate for Obsidian
 
 A simple Obsidian plugin that translates markdown files using OpenAI-compatible APIs. Creates bilingual output with original text followed by translation, line by line.
 
@@ -23,15 +23,15 @@ A simple Obsidian plugin that translates markdown files using OpenAI-compatible 
 ### Build from Source
 
 ```bash
-git clone https://github.com/fishjar/kiss-translator-obsidian.git
-cd kiss-translator-obsidian
+git clone https://github.com/fishjar/obsidian-bilingual-translate.git
+cd obsidian-bilingual-translate
 npm install
 npm run build
 ```
 
 ## Configuration
 
-Go to **Settings → Kiss Translator** to configure:
+Go to **Settings → Bilingual Translate** to configure:
 
 | Setting | Description |
 |---------|-------------|
@@ -54,7 +54,7 @@ Go to **Settings → Kiss Translator** to configure:
 
 1. Open any markdown file
 2. Open Command Palette (`Ctrl/Cmd + P`)
-3. Run **"Kiss Translator: Translate current file"**
+3. Run **"Bilingual Translate: Translate current file"**
 4. Watch as translations appear line by line
 
 You can also set a hotkey for the command in Settings → Hotkeys.
