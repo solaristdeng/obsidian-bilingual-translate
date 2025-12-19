@@ -95,7 +95,7 @@ It demonstrates the translation feature.
 
 ## Credits
 
-Based on [Kiss Translator](https://github.com/fishjar/kiss-translator) Chrome extension.
+This plugin was inspired by and built with reference to [Kiss Translator](https://github.com/fishjar/kiss-translator), a browser extension for translating web pages. Special thanks to the Kiss Translator project for the translation approach and design inspiration.
 
 ## License
 

@@ -20,3 +20,6 @@ data.json
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
+
+# Reference project (not part of this plugin)
+kiss-translator-dev/

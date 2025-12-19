@@ -125,7 +125,7 @@ export class KissTranslatorSettingTab extends PluginSettingTab {
             .setName('Temperature')
             .setDesc('Controls randomness (0 = deterministic, 1 = creative)')
             .addSlider(slider => slider
-                .setLimits(0, 1, 0.1)
+                .setLimits(0, 2, 0.1)
                 .setValue(this.plugin.settings.temperature)
                 .setDynamicTooltip()
                 .onChange(async (value) => {
