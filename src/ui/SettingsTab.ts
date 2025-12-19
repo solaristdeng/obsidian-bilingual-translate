@@ -54,6 +54,36 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
             );
 
         new Setting(containerEl)
+            .setName("Temperature")
+            .setDesc("Controls randomness (0 = deterministic, 2 = very creative). Lower values (0.3) recommended for translation.")
+            .addSlider((slider) =>
+                slider
+                    .setLimits(0, 2, 0.1)
+                    .setValue(this.plugin.settings.temperature)
+                    .setDynamicTooltip()
+                    .onChange(async (value) => {
+                        this.plugin.settings.temperature = value;
+                        await this.plugin.saveSettings();
+                    })
+            );
+
+        new Setting(containerEl)
+            .setName("Concurrency")
+            .setDesc("Number of parallel translation requests. Higher = faster but may hit rate limits.")
+            .addText((text) =>
+                text
+                    .setPlaceholder("3")
+                    .setValue(String(this.plugin.settings.concurrency))
+                    .onChange(async (value) => {
+                        const num = parseInt(value, 10);
+                        if (!isNaN(num) && num >= 1) {
+                            this.plugin.settings.concurrency = num;
+                            await this.plugin.saveSettings();
+                        }
+                    })
+            );
+
+        new Setting(containerEl)
             .setName("Source Language")
             .setDesc("Language of original text (or auto-detect)")
             .addText((text) =>

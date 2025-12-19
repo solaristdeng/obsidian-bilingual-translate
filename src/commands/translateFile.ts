@@ -2,26 +2,28 @@ import { Editor, Notice } from "obsidian";
 import { translateLine } from "../apis/openai";
 import { BilingualTranslateSettings } from "../settings";
 
+interface LineToTranslate {
+    originalLineNum: number;
+    content: string;
+}
+
 export async function translateFile(
     editor: Editor,
     settings: BilingualTranslateSettings
 ): Promise<void> {
-    const content = editor.getValue();
-    const lines = content.split("\n");
-    const newLines: string[] = [];
-
+    const totalLines = editor.lineCount();
     let inCodeBlock = false;
     let inFrontmatter = false;
 
-    new Notice("Starting translation...");
+    // Collect all lines that need translation
+    const linesToTranslate: LineToTranslate[] = [];
 
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+    for (let i = 0; i < totalLines; i++) {
+        const line = editor.getLine(i);
 
         // Check for code block delimiters
         if (line.trim().startsWith("```")) {
             inCodeBlock = !inCodeBlock;
-            newLines.push(line);
             continue;
         }
 
@@ -30,7 +32,6 @@ export async function translateFile(
             if (i === 0 || inFrontmatter) {
                 inFrontmatter = !inFrontmatter;
             }
-            newLines.push(line);
             continue;
         }
 
@@ -41,22 +42,47 @@ export async function translateFile(
             line.trim() === "" ||
             line.trim().startsWith("http://") ||
             line.trim().startsWith("https://") ||
-            line.trim().startsWith("![")
+            line.trim().startsWith("![") ||
+            line.includes("|") // Skip markdown table rows
         ) {
-            newLines.push(line);
             continue;
         }
 
-        // Add original line
-        newLines.push(line);
+        linesToTranslate.push({ originalLineNum: i, content: line });
+    }
+
+    if (linesToTranslate.length === 0) {
+        new Notice("No lines to translate.");
+        return;
+    }
+
+    new Notice(`Starting translation of ${linesToTranslate.length} lines...`);
+
+    // Process in batches based on concurrency setting
+    const concurrency = settings.concurrency;
+    let linesInserted = 0;
+
+    for (let i = 0; i < linesToTranslate.length; i += concurrency) {
+        const batch = linesToTranslate.slice(i, i + concurrency);
 
         try {
-            // Translate and add translation
-            const translation = await translateLine(line, settings);
-            newLines.push(translation);
+            // Translate batch in parallel
+            const translations = await Promise.all(
+                batch.map((item) => translateLine(item.content, settings))
+            );
 
-            // Update editor in real-time for visual feedback
-            editor.setValue(newLines.join("\n"));
+            // Insert translations in order (must be sequential to maintain correct positions)
+            for (let j = 0; j < batch.length; j++) {
+                const item = batch[j];
+                const translation = translations[j];
+                const currentLineNum = item.originalLineNum + linesInserted;
+                const lineContent = editor.getLine(currentLineNum);
+
+                // Insert translation after current line
+                const insertPos = { line: currentLineNum, ch: lineContent.length };
+                editor.replaceRange("\n" + translation, insertPos);
+                linesInserted++;
+            }
         } catch (error) {
             new Notice(`Translation error: ${error.message}`);
             return;

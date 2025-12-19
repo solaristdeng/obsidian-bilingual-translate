@@ -15,7 +15,7 @@ A simple Obsidian plugin that translates markdown files using OpenAI-compatible 
 ### Manual Installation
 
 1. Download `main.js`, `manifest.json`, and `styles.css` from the releases
-2. Create folder: `<YourVault>/.obsidian/plugins/kiss-translator/`
+2. Create folder: `<YourVault>/.obsidian/plugins/obsidian-bilingual-translate/`
 3. Copy the files into that folder
 4. Restart Obsidian
 5. Enable the plugin in Settings → Community plugins
@@ -23,7 +23,7 @@ A simple Obsidian plugin that translates markdown files using OpenAI-compatible 
 ### Build from Source
 
 ```bash
-git clone https://github.com/fishjar/obsidian-bilingual-translate.git
+git clone https://github.com/solaristdeng/obsidian-bilingual-translate.git
 cd obsidian-bilingual-translate
 npm install
 npm run build
@@ -38,6 +38,8 @@ Go to **Settings → Bilingual Translate** to configure:
 | API URL | Your OpenAI-compatible endpoint |
 | API Key | Your API key |
 | Model | Model name (e.g., `gpt-4o-mini`, `llama3.1`) |
+| Temperature | Controls randomness (0-2). Lower values (0.3) recommended for translation. |
+| Concurrency | Number of parallel translation requests. |
 | Source Language | Language of original text (or auto-detect) |
 | Target Language | Language to translate to |
 

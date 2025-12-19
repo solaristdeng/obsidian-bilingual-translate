@@ -12,6 +12,7 @@ export async function translateLine(
         },
         body: JSON.stringify({
             model: settings.model,
+            temperature: settings.temperature,
             messages: [
                 {
                     role: "system",
