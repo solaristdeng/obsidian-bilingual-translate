@@ -5,6 +5,6 @@
 	"minAppVersion": "0.15.0",
 	"description": "Translate markdown files using OpenAI-compatible APIs. Creates bilingual output with original and translated text line by line.",
 	"author": "solaristdeng",
-	"authorUrl": "https://github.com/solaristdeng/kiss-translator-obsidian",
+	"authorUrl": "https://github.com/solaristdeng/obsidian-bilingual-translate",
 	"isDesktopOnly": false
 }
