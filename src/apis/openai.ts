@@ -1,10 +1,12 @@
+import { requestUrl } from "obsidian";
 import { BilingualTranslateSettings } from "../settings";
 
 export async function translateLine(
     line: string,
     settings: BilingualTranslateSettings
 ): Promise<string> {
-    const response = await fetch(settings.apiUrl, {
+    const response = await requestUrl({
+        url: settings.apiUrl,
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -26,10 +28,9 @@ export async function translateLine(
         }),
     });
 
-    if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
+    if (response.status !== 200) {
+        throw new Error(`API request failed: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data.choices[0].message.content.trim();
+    return response.json.choices[0].message.content.trim();
 }

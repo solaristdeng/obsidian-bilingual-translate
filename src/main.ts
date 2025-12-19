@@ -13,7 +13,7 @@ export default class BilingualTranslatePlugin extends Plugin {
             id: "translate-current-file",
             name: "Translate current file",
             editorCallback: (editor) => {
-                translateFile(editor, this.settings);
+                void translateFile(editor, this.settings);
             },
         });
 
