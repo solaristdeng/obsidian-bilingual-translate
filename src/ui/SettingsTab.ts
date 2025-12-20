@@ -15,7 +15,7 @@ export class BilingualTranslateSettingTab extends PluginSettingTab {
         containerEl.empty();
 
         new Setting(containerEl)
-            .setName("API url")
+            .setName("API URL")
             .setDesc("OpenAI-compatible API endpoint")
             .addText((text) =>
                 text
