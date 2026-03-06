@@ -1,16 +1,22 @@
-import { requestUrl } from "obsidian";
+import { App, requestUrl } from "obsidian";
 import { BilingualTranslateSettings } from "../settings";
 
-export async function translateLine(
+export async function translateLineOpenAI(
     line: string,
-    settings: BilingualTranslateSettings
+    settings: BilingualTranslateSettings,
+    app: App
 ): Promise<string> {
+    const apiKey = app.secretStorage.getSecret(settings.apiKeySecretName);
+    if (!apiKey) {
+        throw new Error("API key not found in SecretStorage. Please configure it in settings.");
+    }
+
     const response = await requestUrl({
         url: settings.apiUrl,
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${settings.apiKey}`,
+            Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
             model: settings.model,

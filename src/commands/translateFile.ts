@@ -1,5 +1,5 @@
-import { Editor, Notice } from "obsidian";
-import { translateLine } from "../apis/openai";
+import { App, Editor, Notice } from "obsidian";
+import { translateLine } from "../apis/translate";
 import { BilingualTranslateSettings } from "../settings";
 
 interface LineToTranslate {
@@ -9,7 +9,8 @@ interface LineToTranslate {
 
 export async function translateFile(
     editor: Editor,
-    settings: BilingualTranslateSettings
+    settings: BilingualTranslateSettings,
+    app: App
 ): Promise<void> {
     const totalLines = editor.lineCount();
     let inCodeBlock = false;
@@ -68,7 +69,7 @@ export async function translateFile(
         try {
             // Translate batch in parallel
             const translations = await Promise.all(
-                batch.map((item) => translateLine(item.content, settings))
+                batch.map((item) => translateLine(item.content, settings, app))
             );
 
             // Insert translations in order (must be sequential to maintain correct positions)

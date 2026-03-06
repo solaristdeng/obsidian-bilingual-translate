@@ -2,7 +2,7 @@
 	"id": "bilingual-translate",
 	"name": "Bilingual Translate",
 	"version": "0.0.1",
-	"minAppVersion": "0.15.0",
+	"minAppVersion": "1.11.4",
 	"description": "Translate markdown files using OpenAI-compatible APIs. Creates bilingual output with original and translated text line by line.",
 	"author": "solaristdeng",
 	"authorUrl": "https://github.com/solaristdeng",
